@@ -6,6 +6,7 @@ textuelle (très simple) pour exécuter ses fonctionnalités, et accédant à un
 données via l’API JDBC en mode transactionnel pour éviter des situations
 d’incohérence.
 Le travail se présente comme suit :
+
 • Créer les tables ainsi que le jeu de données.
 • L’application doit implémenter les fonctionnalités suivantes :
 1. Un module de connexion pour les serveurs (login/mdp) du restaurant.
