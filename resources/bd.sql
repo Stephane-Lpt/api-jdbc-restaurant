@@ -1,0 +1,165 @@
+-- Table plat
+DROP TABLE TABL CASCADE CONSTRAINTS;
+DROP TABLE PLAT CASCADE CONSTRAINTS ;
+DROP TABLE SERVEUR CASCADE CONSTRAINTS ;
+DROP TABLE RESERVATION CASCADE CONSTRAINTS ;
+DROP TABLE COMMANDE CASCADE CONSTRAINTS ;
+DROP TABLE AFFECTER CASCADE CONSTRAINTS ;
+
+
+
+create table tabl
+(numtab number(4),
+ nbplace number (2),
+ primary key(numtab));
+
+-- Tuples de Tabl
+insert into tabl values(10,4);
+insert into tabl values(11,6);
+insert into tabl values(12,8);
+insert into tabl values(13,4);
+insert into tabl values(14,6);
+insert into tabl values(15,4);
+insert into tabl values(16,4);
+insert into tabl values(17,6);
+insert into tabl values(18,2);
+insert into tabl values(19,4);
+
+-- Table plat
+create table plat
+(numplat number(4),
+ libelle varchar2(40),
+ type varchar2(15),
+ prixunit number(6,2),
+ qteservie number(2),
+ primary key (numplat));
+
+-- Tuples de Plat
+insert into plat values(1,'assiette de crudités','Entrée',90,25);
+insert into plat values(2,'tarte de saison','Dessert',90,25);
+insert into plat values(3,'sorbet mirabelle','Dessert',90,35);
+insert into plat values(4,'filet de boeuf','Viande',90,62);
+insert into plat values(5,'salade verte','Entrée',90,15);
+insert into plat values(6,'chevre chaud','Entrée',90,21);
+insert into plat values(7,'pate lorrain','Entrée',90,25);
+insert into plat values(8,'saumon fumé','Entrée',90,30);
+insert into plat values(9,'entrecote printaniere','Viande',90,58);
+insert into plat values(10,'gratin dauphinois','Plat',90,42);
+insert into plat values(11,'brochet à l''oseille','Poisson',90,68);
+insert into plat values(12,'gigot d''agneau','Viande',90,56);
+insert into plat values(13,'crème caramel','Dessert',90,15);
+insert into plat values(14,'munster au cumin','Fromage',90,18);
+insert into plat values(15,'filet de sole au beurre','Poisson',90,70);
+insert into plat values(16,'fois gras de lorraine','Entrée',90,61);
+
+-- Table Serveur
+create table serveur
+(numserv number(2),
+ email varchar2(255),
+ passwd varchar2(255),
+ nomserv varchar2(25),
+ grade varchar2(20),
+ primary key(numserv)
+);
+
+-- Tuples de Serveur
+insert into serveur values(1,'user1@mail.com','serveur0','Tutus Peter','gestionnaire');
+insert into serveur values(2,'user2@mail.com','serveur1','Lilo Vito','serveur');
+insert into serveur values(3,'user3@mail.com','serveur2','Don Carl','serveur');
+insert into serveur values(4,'user4@mail.com','serveur3','Leo Jon','serveur');
+insert into serveur values(5,'user5@mail.com','serveur4','Dean Geak','gestionnaire');
+
+
+-- Table reservation
+create table reservation
+(numres number(4),
+ numtab number(4),
+ datres date,
+ nbpers number(2),
+ datpaie date,
+ modpaie varchar2(15),
+ montcom number(8,2),
+ primary key (numres)
+);
+
+-- Tuples de reservation
+insert into reservation values(100,10,to_date('10/09/2021 19:00','dd/mm/yyyy hh24:mi'),2,to_date('10/09/2021 20:50','dd/mm/yyyy hh24:mi'),'Carte',null);
+insert into reservation values(101,11,to_date('10/09/2021 20:00','dd/mm/yyyy hh24:mi'),4,to_date('10/09/2021 21:20','dd/mm/yyyy hh24:mi'),'Chèque',null);
+insert into reservation values(102,17,to_date('10/09/2021 18:00','dd/mm/yyyy hh24:mi'),2,to_date('10/09/2021 20:55','dd/mm/yyyy hh24:mi'),'Carte',null);
+insert into reservation values(103,12,to_date('10/09/2021 19:00','dd/mm/yyyy hh24:mi'),2,to_date('10/09/2021 21:10','dd/mm/yyyy hh24:mi'),'Espèces',null);
+insert into reservation values(104,18,to_date('10/09/2021 19:00','dd/mm/yyyy hh24:mi'),1,to_date('10/09/2021 21:00','dd/mm/yyyy hh24:mi'),'Chèque',null);
+insert into reservation values(105,10,to_date('10/09/2021 19:00','dd/mm/yyyy hh24:mi'),2,to_date('10/09/2021 20:45','dd/mm/yyyy hh24:mi'),'Carte',null);
+insert into reservation values(106,14,to_date('11/10/2021 19:00','dd/mm/yyyy hh24:mi'),2,to_date('11/10/2021 22:45','dd/mm/yyyy hh24:mi'),'Carte',null);
+
+-- Table commande
+create table commande
+(numres number(4),
+ numplat number (4),
+ quantite number(2),
+ primary key(numres,numplat));
+
+-- Tuples de commande
+insert into commande values(100,4,2);
+insert into commande values(100,5,2);
+insert into commande values(100,13,1);
+insert into commande values(100,3,1);
+insert into commande values(101,7,2);
+insert into commande values(101,16,2);
+insert into commande values(101,12,2);
+insert into commande values(101,15,2);
+insert into commande values(101,2,2);
+insert into commande values(101,3,2);
+insert into commande values(102,1,2);
+insert into commande values(102,10,2);
+insert into commande values(102,14,2);
+insert into commande values(102,2,1);
+insert into commande values(102,3,1);
+insert into commande values(103,9,2);
+insert into commande values(103,14,2);
+insert into commande values(103,2,1);
+insert into commande values(103,3,1);
+insert into commande values(104,7,1);
+insert into commande values(104,11,1);
+insert into commande values(104,14,1);
+insert into commande values(104,3,1);
+insert into commande values(105,3,2);
+insert into commande values(106,3,2);
+
+
+-- Table affecter
+create table affecter
+(numtab number(4),
+ dataff date,
+ numserv number(2),
+ primary key(numtab,dataff)
+);
+
+-- Tuples de Affecter
+insert into affecter values(10, to_date('10/09/2021', 'dd/mm/yyyy'),1);
+insert into affecter values(11, to_date('10/09/2021', 'dd/mm/yyyy'),1);
+insert into affecter values(12, to_date('10/09/2021', 'dd/mm/yyyy'),1);
+insert into affecter values(17, to_date('10/09/2021', 'dd/mm/yyyy'),2);
+insert into affecter values(18, to_date('10/09/2021', 'dd/mm/yyyy'),2);
+insert into affecter values(15, to_date('10/09/2021', 'dd/mm/yyyy'),3);
+insert into affecter values(16, to_date('10/09/2021', 'dd/mm/yyyy'),3);
+insert into affecter values(10, to_date('11/09/2021', 'dd/mm/yyyy'),1);
+
+
+alter table reservation add ( foreign
+    key (numtab)
+    references tabl(numtab));
+
+alter table affecter add ( foreign key
+    (numserv)
+    references serveur(numserv));
+
+alter table commande add ( foreign key
+    (numres)
+    references reservation(numres));
+
+alter table commande add ( foreign key
+    (numplat)
+    references plat(numplat));
+
+
+
